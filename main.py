@@ -8,6 +8,7 @@ from shot import Shot
 def main():
 	pygame.init()
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+	pygame.display.set_caption("Klar's game")
 	clock = pygame.time.Clock()
 	dt = 0
 	
@@ -35,7 +36,7 @@ def main():
 		for x in asteroids:
 			if x.collision(player) == True:
 				print("Game over!")
-				exit()
+#				exit()
 			for shot in shots:
 				if x.collision(shot) == True:
 					shot.kill()
