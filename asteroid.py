@@ -2,7 +2,7 @@ import pygame
 import pygame.gfxdraw
 import random
 from circleshape import CircleShape
-from constants import *
+from data.constants import *
 
 class Asteroid(CircleShape):
 	def __init__(self, x, y, radius):
@@ -12,6 +12,7 @@ class Asteroid(CircleShape):
 		self.random_g = random.uniform(65, 72)
 		self.random_b = random.uniform(28, 36)
 		self.random_angle = random.uniform(20, 50)
+		self.value = self.radius
 
 	def draw(self, screen):
 		pygame.gfxdraw.filled_circle(screen, int(self.position.x), int(self.position.y), self.radius, (self.random_r, self.random_g, self.random_b))
@@ -22,7 +23,7 @@ class Asteroid(CircleShape):
 	def split(self):
 		self.kill()
 		if self.radius <= ASTEROID_MIN_RADIUS:
-			return
+			return self.value
 		v1 = self.velocity.rotate(self.random_angle)
 		v2 = self.velocity.rotate(-self.random_angle)
 		new_radius = self.radius - ASTEROID_MIN_RADIUS
@@ -31,3 +32,4 @@ class Asteroid(CircleShape):
 
 		n1.velocity = v1 * 1.2
 		n2.velocity = v2 * 1.2
+		return self.value

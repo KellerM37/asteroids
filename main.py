@@ -2,8 +2,8 @@ import pygame
 import pygame_gui
 from pygame_gui.elements import UILabel
 from pygame_gui.elements import UIPanel
-from constants import *
-from player import Player
+from data.constants import *
+from data.player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
@@ -13,7 +13,7 @@ def main():
 	pygame.init()
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	ui_manager = pygame_gui.UIManager(screen.get_size(), "ui_theme.json")
-	background = pygame.image.load("stars.jpg").convert()
+	#background = pygame.image.load("stars.jpg").convert()
 	pygame.display.set_caption("Klar's game")
 	clock = pygame.time.Clock()
 	is_running = True
@@ -44,7 +44,6 @@ def main():
 	while is_running:
 		# 60 fps max
 		dt = clock.tick(60) / 1000
-		score = player.score
 
 		# Check for events
 		for event in pygame.event.get():
@@ -64,20 +63,18 @@ def main():
 			for shot in shots:
 				if x.collision(shot) == True:
 					shot.kill()
-					x.split()
+					score += x.split()
+					score_text.set_text(f"Score: {score}")
 
-
-
-
-#		screen.fill(("black"))
-		screen.blit(background, (0, 0))
+		screen.fill(("black"))
+		#screen.blit(background, (0, 0))
 
 		for x in drawable:
 			x.draw(screen)
 			
 		ui_manager.draw_ui(screen)
 
-		pygame.display.update()
+		pygame.display.flip()
 
 if __name__ == "__main__":
 	main()

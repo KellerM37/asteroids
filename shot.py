@@ -1,7 +1,7 @@
 import pygame
 import pygame.gfxdraw
 from circleshape import CircleShape
-from constants import *
+from data.constants import *
 
 class Shot(CircleShape):
 	def __init__(self, x, y):

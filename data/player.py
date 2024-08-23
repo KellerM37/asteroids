@@ -1,7 +1,7 @@
 import pygame
 import pygame.gfxdraw
 from circleshape import CircleShape
-from constants import *
+from data.constants import *
 from shot import Shot
 
 class Player(CircleShape):
